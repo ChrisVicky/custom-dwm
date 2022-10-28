@@ -1,3 +1,10 @@
+# Customed DWM Repo
+
+* Forked from [dwm's official repo](git://git.suckless.org/dwm)
+* Patched with Some patches --> in folder `./patches`
+
+---
+
 dwm - dynamic window manager
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
