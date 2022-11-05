@@ -6,7 +6,15 @@ static const unsigned int gappx     = 4;       /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "CodeNewRoman Nerd Font:size=12", "LXGW WenKai:size=12"};
+static const char *fonts[]          = { 
+	"CodeNewRoman Nerd Font:size=12",
+       	"LXGW WenKai:size=12",
+       	"Symbols Nerd Font:size=12"
+	"JetBrainsMono Nerd Font:pixelsize=18",
+	"CodeNewRoman Nerd Font:pixelsize=18",
+	"Liberation Mono:pixelsize=12:antialias=true:autohint=true",
+	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
+};
 static const char dmenufont[]       = "CodeNewRoman Nerd Font:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -17,6 +25,11 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeStatus]  = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+	[SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+	[SchemeInfoSel]  = { col_gray4, col_cyan,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+	[SchemeInfoNorm]  = { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
@@ -103,6 +116,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
+	{0, 				XK_Print, 	spawn, 		SHCMD("flameshot gui")}, // flameshot
 };
 
 /* button definitions */
