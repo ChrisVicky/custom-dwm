@@ -7,10 +7,10 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { 
-	"CodeNewRoman Nerd Font:size=12",
        	"LXGW WenKai:size=12",
-       	"Symbols Nerd Font:size=12"
 	"JetBrainsMono Nerd Font:pixelsize=18",
+	"CodeNewRoman Nerd Font:size=12",
+       	"Symbols Nerd Font:size=12"
 	"CodeNewRoman Nerd Font:pixelsize=18",
 	"Liberation Mono:pixelsize=12:antialias=true:autohint=true",
 	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
@@ -119,6 +119,16 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 	{0, 				XK_Print, 	spawn, 		SHCMD("flameshot gui")}, // flameshot
+// KEYS for XF86 --> Volum and Brightness
+// Volumn
+	{0, 		XF86XK_AudioRaiseVolume, 	spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
+	{0, 		XF86XK_AudioRaiseVolume, 	spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
+	{0, 		XF86XK_AudioLowerVolume, 	spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%")},
+	{0, 		XF86XK_AudioMute, 		spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
+	{0, 		XF86XK_AudioMicMute, 		spawn, SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle")},
+// Brightness
+    	{0,            	XF86XK_MonBrightnessUp,    	spawn, SHCMD("xbacklight -inc 5") },
+    	{0,            	XF86XK_MonBrightnessDown,  	spawn, SHCMD("xbacklight -dec 5") },
 };
 
 /* button definitions */
