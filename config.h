@@ -19,8 +19,12 @@ static const char dmenufont[]       = "CodeNewRoman Nerd Font:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+// static const char col_gray4[]       = "#eeeeee";
+static const char col_gray4[]       = "#1E1E2E";
+// static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#BABBF1";
+
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -33,7 +37,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+// static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = {"壹","贰","叁","肆","伍","陆","柒","捌","玖","拾"};
 
 static const Rule rules[] = {
 	/* xprop(1):
