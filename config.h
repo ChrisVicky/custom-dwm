@@ -84,6 +84,8 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *termcmd_kitty[] = { "kitty", NULL };
+static const char *termcmd_terminator[] = { "terminator", NULL };
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -100,7 +102,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	// { MODKEY,                       XK_Return, zoom,           {0} }, // Not so useful
-	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd_kitty } },
+	// { MODKEY,             		XK_Return, spawn,          {.v = termcmd_kitty } },
+	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd_terminator} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
@@ -134,8 +137,8 @@ static const Key keys[] = {
 	{0, 		XF86XK_AudioRaiseVolume, 	spawn, MYSHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
 	{0, 		XF86XK_AudioRaiseVolume, 	spawn, MYSHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
 	{0, 		XF86XK_AudioLowerVolume, 	spawn, MYSHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%")},
-	{0, 		XF86XK_AudioMute, 		spawn, MYSHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
-	{0, 		XF86XK_AudioMicMute, 		spawn, MYSHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle")},
+	{0, 		XF86XK_AudioMute, 		    spawn, MYSHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
+	{0, 		XF86XK_AudioMicMute, 		  spawn, MYSHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle")},
 // Brightness
     	{0,            	XF86XK_MonBrightnessUp,    	spawn, MYSHCMD("xbacklight -inc 5") },
     	{0,            	XF86XK_MonBrightnessDown,  	spawn, MYSHCMD("xbacklight -dec 5") },
