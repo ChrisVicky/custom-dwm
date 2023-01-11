@@ -98,7 +98,9 @@ static const char *termcmd_terminator[] = { "terminator", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -modi drun,run -show drun")},
+	// { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -modi drun,run -show drun")},
+	// { MODKEY,                       XK_p,      spawn,          CUSTOM_SCRIPTS(call_rofi.sh drun)},
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          CUSTOM_SCRIPTS(call_rofi.sh drun)},
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
