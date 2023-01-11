@@ -1,7 +1,25 @@
 # Customed DWM Repo
 
 * Forked from [dwm's official repo](git://git.suckless.org/dwm)
-* Patched with Some patches --> in folder `./patches`
+* Patches -> in folder `./patches`
+
+Custom Settings
+===============
+
+* For **custom scripts**, we look for directory: `~/.dwm/scripts` as default choice. 
+  * Change it by changing Macro `scripts_dir`:
+```c
+/* helper for using custom scripts stored in custom Locations */
+#define scripts_dir ~/.dwm/scripts/               // Custom Location to store scripts
+#define lock_script mylockscreen.sh               // Custom Scripts for lock screen
+#define screenshot_script myscreenshotapi.sh      // Custom Scripts for screen shots
+#define CONCAT(x,y) #x#y
+#define CONCAT2(x,y) CONCAT(x,y)                  // Cache it, or '#' would obtain 'scripts_dir'(string) instead of its value
+#define FULLPATH(x) CONCAT2(scripts_dir, x)
+#define CUSTOM_SCRIPTS(cmd) SHCMD(FULLPATH(cmd))
+```
+
+
 
 ---
 
