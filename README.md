@@ -19,6 +19,8 @@ Custom Settings
 #define CUSTOM_SCRIPTS(cmd) SHCMD(FULLPATH(cmd))
 ```
 
+* Rofi
+   * Rofi configuration and `call_rofi.sh` are forked from `https://github.com/yaocccc/scripts`
 
 
 ---
