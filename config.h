@@ -7,11 +7,10 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { 
+	"CodeNewRoman Nerd Font:size=14",
        	"LXGW WenKai:size=12",
-	"JetBrainsMono Nerd Font:pixelsize=18",
-	"CodeNewRoman Nerd Font:size=12",
+	"JetBrainsMono Nerd Font:pixelsize=12",
        	"Symbols Nerd Font:size=12",
-	"CodeNewRoman Nerd Font:pixelsize=18",
 	"Liberation Mono:pixelsize=12:antialias=true:autohint=true",
 	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
 };
@@ -78,12 +77,21 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define MYSHCMD(cmd) SHCMD(cmd" && killall mystatusbar.sh && mystatusbar.sh &")
+#define SHCMD_RSTATUS(cmd) SHCMD(cmd" && killall mystatusbar.sh && mystatusbar.sh &")
+
+/* helper for using custom scripts stored in custom Locations */
+#define scripts_dir ~/.dwm/scripts/               // Custom Location to store scripts
+#define lock_script mylockscreen.sh               // Custom Scripts for lock screen
+#define screenshot_script myscreenshotapi.sh      // Custom Scripts for screen shots
+#define CONCAT(x,y) #x#y
+#define CONCAT2(x,y) CONCAT(x,y)                  // Cache it, or '#' would obtain 'scripts_dir'(string) instead of its value
+#define FULLPATH(x) CONCAT2(scripts_dir, x)
+#define CUSTOM_SCRIPTS(cmd) SHCMD(FULLPATH(cmd))
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *termcmd_kitty[] = { "kitty", NULL };
+// static const char *termcmd_kitty[] = { "kitty", NULL };
 static const char *termcmd_terminator[] = { "terminator", NULL };
 
 
@@ -131,19 +139,19 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 	{ MODKEY|ShiftMask, 		XK_r, 	   quit, 	   {1} },
-	{0, 				XK_Print, 	spawn, 		SHCMD("myscreenshotapi.sh")}, // flameshot
+	{0, 				XK_Print, 	spawn, 		CUSTOM_SCRIPTS(myscreenshotapi.sh)}, // flameshot
 // KEYS for XF86 --> Volum and Brightness
 // Volumn
-	{0, 		XF86XK_AudioRaiseVolume, 	spawn, MYSHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
-	{0, 		XF86XK_AudioRaiseVolume, 	spawn, MYSHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
-	{0, 		XF86XK_AudioLowerVolume, 	spawn, MYSHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%")},
-	{0, 		XF86XK_AudioMute, 		    spawn, MYSHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
-	{0, 		XF86XK_AudioMicMute, 		  spawn, MYSHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle")},
+	{0, 		XF86XK_AudioRaiseVolume, 	spawn, SHCMD_RSTATUS("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
+	{0, 		XF86XK_AudioRaiseVolume, 	spawn, SHCMD_RSTATUS("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
+	{0, 		XF86XK_AudioLowerVolume, 	spawn, SHCMD_RSTATUS("pactl set-sink-volume @DEFAULT_SINK@ -5%")},
+	{0, 		XF86XK_AudioMute, 		    spawn, SHCMD_RSTATUS("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
+	{0, 		XF86XK_AudioMicMute, 		  spawn, SHCMD_RSTATUS("pactl set-source-mute @DEFAULT_SOURCE@ toggle")},
 // Brightness
-    	{0,            	XF86XK_MonBrightnessUp,    	spawn, MYSHCMD("xbacklight -inc 5") },
-    	{0,            	XF86XK_MonBrightnessDown,  	spawn, MYSHCMD("xbacklight -dec 5") },
+    	{0,            	XF86XK_MonBrightnessUp,    	spawn, SHCMD_RSTATUS("xbacklight -inc 5") },
+    	{0,            	XF86XK_MonBrightnessDown,  	spawn, SHCMD_RSTATUS("xbacklight -dec 5") },
 // Lock Screen
-	{ MODKEY|ControlMask, 		XK_l, 		spawn, SHCMD("mylockscreen.sh")},
+	{ MODKEY|ControlMask, 		XK_l, 		spawn, CUSTOM_SCRIPTS(mylockscreen.sh)},
 };
 
 
