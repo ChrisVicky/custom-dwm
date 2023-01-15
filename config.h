@@ -165,8 +165,7 @@ static const Key keys[] = {
   { MODKEY|ShiftMask,             XK_e,      quit,           {0} },
   /* 退出當前 dwm 然後 重新加載 dwm 並保留原有窗口（但不保證位置） */
   { MODKEY|ShiftMask, 		        XK_r, 	   quit, 	        {1} },
-  {0, 				XK_Print, 	spawn, 		CUSTOM_SCRIPTS(myscreenshotapi.sh)}, // flameshot
-                                                                         // KEYS for XF86 --> Volum and Brightness
+  // KEYS for XF86 --> Volum and Brightness
   /* pactl 控制音量 */
   {0, 		XF86XK_AudioRaiseVolume, 	spawn, SHCMD_RSTATUS("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
   {0, 		XF86XK_AudioRaiseVolume, 	spawn, SHCMD_RSTATUS("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
@@ -177,7 +176,12 @@ static const Key keys[] = {
   {0,     XF86XK_MonBrightnessUp,    	spawn, SHCMD_RSTATUS("xbacklight -inc 5") },
   {0,     XF86XK_MonBrightnessDown,  	spawn, SHCMD_RSTATUS("xbacklight -dec 5") },
   /* 調用腳本進行鎖屏 */
-  { MODKEY|ControlMask, 		XK_l, 		spawn, CUSTOM_SCRIPTS(mylockscreen.sh)},
+  { MODKEY|ControlMask, 		XK_l, 		  spawn,    CUSTOM_SCRIPTS(mylockscreen.sh)},
+  {0, 				              XK_Print, 	spawn, 		CUSTOM_SCRIPTS(myscreenshotapi.sh)},
+  {MODKEY,                  XK_w,       spawn,    CUSTOM_SCRIPTS(wallpaper_random.sh)},
+  {MODKEY,                  XK_c,       spawn,    CUSTOM_SCRIPTS(capturehighlight.sh)},
+  {MODKEY,                  XK_v,       spawn,    CUSTOM_SCRIPTS(translate.sh)},
+  {MODKEY,                  XK_s,       spawn,    CUSTOM_SCRIPTS(load_screen.sh)},
 
   /* 工作區定義 */
   /* macro    Key     tag   cmd */
