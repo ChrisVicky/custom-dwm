@@ -22,6 +22,10 @@ Custom Settings
 * Rofi
    * Rofi configuration and `call_rofi.sh` are forked from `https://github.com/yaocccc/scripts`
 
+* Add Patches
+```
+patch < ./patches/**.diff
+```
 
 ---
 
