@@ -13,6 +13,8 @@ options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
+	@echo "Run ln -sf to make scripts available for dwm"
+	ln -sf `pwd`/DwmScripts ~/.dwm
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
