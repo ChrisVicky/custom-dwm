@@ -14,7 +14,7 @@ static const char *fonts[]          = {
 	"Liberation Mono:pixelsize=12:antialias=true:autohint=true",
 	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
 };
-static const char dmenufont[]       = "CodeNewRoman Nerd Font:size=12";
+static const char dmenufont[]       = "CodeNewRoman Nerd Font:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 // static const char col_gray3[]       = "#bbbbbb";
@@ -106,8 +106,6 @@ static const Layout layouts[] = {
 
 /* helper for using custom scripts stored in custom Locations */
 #define scripts_dir ~/.dwm/scripts/               // Custom Location to store scripts
-#define lock_script mylockscreen.sh               // Custom Scripts for lock screen
-#define screenshot_script myscreenshotapi.sh      // Custom Scripts for screen shots
 #define CONCAT(x,y) #x#y
 #define CONCAT2(x,y) CONCAT(x,y)                  // Cache it, or '#' would obtain 'scripts_dir'(string) instead of its value
 #define FULLPATH(x) CONCAT2(scripts_dir, x)
@@ -178,12 +176,12 @@ static const Key keys[] = {
 	{0,     XF86XK_MonBrightnessUp,    	spawn, SHCMD_RSTATUS("xbacklight -inc 5") },
 	{0,     XF86XK_MonBrightnessDown,  	spawn, SHCMD_RSTATUS("xbacklight -dec 5") },
 	/* 調用腳本進行鎖屏 */
-	{ MODKEY|ControlMask, 		XK_l, 		  spawn,    CUSTOM_SCRIPTS(mylockscreen.sh)},
-	{0, 				              XK_Print, 	spawn, 		CUSTOM_SCRIPTS(myscreenshotapi.sh)},
-	{MODKEY,                  XK_w,       spawn,    CUSTOM_SCRIPTS(wallpaper_random.sh)},
-	{MODKEY,                  XK_c,       spawn,    CUSTOM_SCRIPTS(capturehighlight.sh)},
-	{MODKEY,                  XK_v,       spawn,    CUSTOM_SCRIPTS(translate.sh)},
-	{MODKEY,                  XK_s,       spawn,    CUSTOM_SCRIPTS(load_screen.sh)},
+	{MODKEY|ControlMask, 	XK_l, 		spawn,    	CUSTOM_SCRIPTS(mylockscreen.sh)},
+	{0, 			  XK_Print, 	spawn, 		CUSTOM_SCRIPTS(myscreenshotapi.sh)},
+	{MODKEY, 		XK_w,       	spawn,    	CUSTOM_SCRIPTS(wallpaper_random.sh)},
+	{MODKEY, 		XK_c,       	spawn,    	CUSTOM_SCRIPTS(capturehighlight.sh)},
+	{MODKEY,    XK_v,       	spawn,    	CUSTOM_SCRIPTS(translate.sh)},
+	{MODKEY,    XK_s,       	spawn, 		CUSTOM_SCRIPTS(load_screen.sh)},
 
 	/* 工作區定義 */
 	/* macro    Key     tag   cmd */

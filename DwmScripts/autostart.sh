@@ -15,7 +15,7 @@ picom \
 xss-lock -- ~/.dwm/scripts/mylockscreen.sh &
 
 # 开启 clash for windows 
-/home/christopher/.config/clash/clash-GUI/cfw &
+# /home/christopher/.config/clash/clash-GUI/cfw &
 
 cron(){
 	let i=0

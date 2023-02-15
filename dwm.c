@@ -1018,8 +1018,9 @@ keypress(XEvent *e)
 	for (i = 0; i < LENGTH(keys); i++)
 		if (keysym == keys[i].keysym
 				&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
-				&& keys[i].func)
+				&& keys[i].func){
 			keys[i].func(&(keys[i].arg));
+    }
 }
 
 	void
