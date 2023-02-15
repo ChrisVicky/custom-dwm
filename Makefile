@@ -14,7 +14,6 @@ options:
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
 	@echo "Run ln -sf to make scripts available at '~/.dwm' for dwm"
-	ln -sf `pwd`/DwmScripts ~/.dwm
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
