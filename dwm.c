@@ -963,21 +963,32 @@ void grabbuttons(Client *c, int focused) {
   }
 }
 
-void grabkeys(void) {
-  updatenumlockmask();
-  {
-    unsigned int i, j;
-    unsigned int modifiers[] = {0, LockMask, numlockmask,
-                                numlockmask | LockMask};
-    KeyCode code;
+void
+grabkeys(void)
+{
+	updatenumlockmask();
+	{
+		unsigned int i, j, k;
+		unsigned int modifiers[] = { 0, LockMask, numlockmask, numlockmask|LockMask };
+		int start, end, skip;
+		KeySym *syms;
 
-    XUngrabKey(dpy, AnyKey, AnyModifier, root);
-    for (i = 0; i < LENGTH(keys); i++)
-      if ((code = XKeysymToKeycode(dpy, keys[i].keysym)))
-        for (j = 0; j < LENGTH(modifiers); j++)
-          XGrabKey(dpy, code, keys[i].mod | modifiers[j], root, True,
-                   GrabModeAsync, GrabModeAsync);
-  }
+		XUngrabKey(dpy, AnyKey, AnyModifier, root);
+		XDisplayKeycodes(dpy, &start, &end);
+		syms = XGetKeyboardMapping(dpy, start, end - start + 1, &skip);
+		if (!syms)
+			return;
+		for (k = start; k <= end; k++)
+			for (i = 0; i < LENGTH(keys); i++)
+				/* skip modifier codes, we do that ourselves */
+				if (keys[i].keysym == syms[(k - start) * skip])
+					for (j = 0; j < LENGTH(modifiers); j++)
+						XGrabKey(dpy, k,
+							 keys[i].mod | modifiers[j],
+							 root, True,
+							 GrabModeAsync, GrabModeAsync);
+		XFree(syms);
+	}
 }
 
 void incnmaster(const Arg *arg) {
@@ -1629,13 +1640,22 @@ void setmfact(const Arg *arg) {
   arrange(selmon);
 }
 
-void setup(void) {
-  int i;
-  XSetWindowAttributes wa;
-  Atom utf8string;
+void
+setup(void)
+{
+	int i;
+	XSetWindowAttributes wa;
+	Atom utf8string;
+	struct sigaction sa;
 
-  /* clean up any zombies immediately */
-  sigchld(0);
+	/* do not transform children into zombies when they terminate */
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_NOCLDSTOP | SA_NOCLDWAIT | SA_RESTART;
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGCHLD, &sa, NULL);
+
+	/* clean up any zombies (inherited from .xinitrc etc) immediately */
+	while (waitpid(-1, NULL, WNOHANG) > 0);
 
   signal(SIGHUP, sighup);
   signal(SIGTERM, sigterm);
@@ -1730,16 +1750,26 @@ void showhide(Client *c) {
   }
 }
 
-void sigchld(int unused) {
-  if (signal(SIGCHLD, sigchld) == SIG_ERR)
-    die("can't install SIGCHLD handler:");
-  while (0 < waitpid(-1, NULL, WNOHANG))
-    ;
-}
+void
+spawn(const Arg *arg)
+{
+	struct sigaction sa;
 
-void sighup(int unused) {
-  Arg a = {.i = 1};
-  quit(&a);
+	if (arg->v == dmenucmd)
+		dmenumon[0] = '0' + selmon->num;
+	if (fork() == 0) {
+		if (dpy)
+			close(ConnectionNumber(dpy));
+		setsid();
+
+		sigemptyset(&sa.sa_mask);
+		sa.sa_flags = 0;
+		sa.sa_handler = SIG_DFL;
+		sigaction(SIGCHLD, &sa, NULL);
+
+		execvp(((char **)arg->v)[0], (char **)arg->v);
+		die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
+	}
 }
 
 void sigterm(int unused) {
