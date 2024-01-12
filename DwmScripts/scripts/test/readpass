@@ -1,0 +1,15 @@
+# vim:filetype=bash
+# pfile=./password
+pfile=~/Documents/Password/password
+decryptor(){
+	kfile=LICENSE
+	ans=$(echo "$1" | openssl enc -d -aes256 -base64 -kfile $kfile 2>/dev/null)
+	echo "$ans"
+}
+readpass(){
+	#  TODO: URL (or password) Extraction
+	encode=$(grep -v '^#' $pfile | dmenu -i -c -l 50 -g 1 | cut -d "(" -f2 | cut -d ")" -f1)
+	decode=$(decryptor $encode)
+	xdotool type $decode
+}
+readpass

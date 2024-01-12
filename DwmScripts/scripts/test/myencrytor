@@ -1,0 +1,6 @@
+# vim: filetype=bash
+# encoding=utf-8
+
+kfile=LICENSE
+enc=$(echo "$1" | openssl enc -e -aes256 -base64 -kfile $kfile 2>/dev/null)
+echo "$enc"

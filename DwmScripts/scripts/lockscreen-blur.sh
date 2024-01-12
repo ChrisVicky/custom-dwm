@@ -65,7 +65,7 @@ i3lock \
   --clock \
   --indicator \
   --time-str="%H:%M:%S" \
-  --date-str="週%a %b %e號 %Y" \
+  --date-str="週%a %Y %b %e號" \
   --verif-text="驗證中..." \
   --wrong-text="驗證失敗" \
   --noinput="請輸入" \

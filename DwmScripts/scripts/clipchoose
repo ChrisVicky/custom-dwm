@@ -1,0 +1,6 @@
+#!/bin/bash
+name=$(clipsave name)
+cachdir=$(clipsave cachdir)/${name}
+str="$(perl -e 'print reverse <>' $cachdir | dmenu -g 1 -l 10)"
+MSG=${str: 10}
+xdotool type --delay 10 "$MSG"

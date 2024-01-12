@@ -1,0 +1,8 @@
+#!/bin/bash
+[[ -z "$2" ]] && length=2 || length=$2
+[[ -z "${1// }" ]]&& echo "Empty Input" || echo "Input Valid"
+[[ ${#1} > $length ]] && echo "Length Bigger than $length" || echo "Length Less than $length"
+
+FFFFF[[[[]]]]
+
+

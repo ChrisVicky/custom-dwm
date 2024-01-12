@@ -1,0 +1,31 @@
+# vim:filetype=bash
+# pfile=~/Documents/Password/password
+pfile=./password
+kfile=LICENSE
+
+encryptor(){
+  enc=$(echo "$1" | openssl enc -e -aes256 -base64 -kfile $kfile 2>/dev/null)
+  echo "$enc"
+}
+
+savepass(){
+  response=$( 							kitty \
+    dialog 							\
+    --separate-widget $'\n' 				\
+    --title "INSERIR" 					\
+    --form "测试" 						\
+    0 0 0 							\
+    "Password:" 	1 1     "" 	1 10 30 0 		\
+    "Comment:" 	2 1     "" 	2 10 30 0 		\
+    3>&1 1>&2 2>&3 3>&- 					\
+  )
+
+  pass=$(echo "$response" | sed -n 1p)
+  comm=$(echo "$response" | sed -n 2p)
+
+
+  enc=$(encryptor $pass)
+  echo "[$comm]($enc)" >> $pfile
+}
+
+savepass

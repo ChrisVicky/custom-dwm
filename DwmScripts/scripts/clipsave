@@ -1,0 +1,30 @@
+#!/bin/bash
+cachdir=/tmp/clipboard
+names=("clipboard" "primary" "secondary")
+name=clipboard
+[[ -d $cachdir ]] || mkdir $cachdir
+
+help_msg="$0 cachdir"
+case $1 in
+	help) echo $help_msg ;;
+	cachdir) echo $cachdir ;;
+	name) echo $name ;;
+	*)
+		while true
+		do 
+			clipnotify -s $name
+			[[ "$(xclip -o -t TARGETS -selection $name | grep STRING)" == "" ]] && continue 
+			content=$(xclip -o -t UTF8_STRING -selection $name)
+			[[ "$content" == "" ]] && continue
+            [[ -z "${content// }" ]] && continue                # Only Spaces
+            content="$content"
+            [[ ${#content} -le 3 ]] && continue                   # Too Few
+            ## TODO: 这个地方还有点问题，如果直接使用 grep 的话，包含关系的内容无法操作添加
+            #       has=$(grep "$content" ${cachdir}/${name})
+            #       [[ "$has" ]] && continue 
+			content=`date +"%H時%M分%S秒"`' '$content
+      		echo $content >> ${cachdir}/${name}
+		done
+		;;
+esac
+

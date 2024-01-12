@@ -1,0 +1,105 @@
+3
+4234
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+$1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/bin /boot /dev /etc /home /lib /lib64 /lost+found /mnt /opt /proc /root /run /sbin /srv /swapfile /sys /tmp /usr /var See LICENSE file for copyright and license details. patches/
+/bin /boot /dev /etc /home /lib /lib64 /lost+found /mnt /opt /proc /root /run /sbin /srv /swapfile /sys /tmp /usr /var See LICENSE file for copyright and license details. patches/
+/bin /boot /dev /etc /home /lib /lib64 /lost+found /mnt /opt /proc /root /run /sbin /srv /swapfile /sys /tmp /usr /var See LICENSE file for copyright and license details. patches/
+#include <ctype.h>
+#include <locale.h>
+#include <ctype.h>
+#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <time.h>
+#include <unistd.h>
+#include <time.h>
+#include <strings.h>
+#include <string.h>

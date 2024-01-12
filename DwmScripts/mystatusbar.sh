@@ -2,7 +2,7 @@
 
 myvolume(){
 	# echo `pactl get-sink-volume @DEFAULT_SINK@`
-	local icons=("奄" "奔" "墳" "墳" "ﱝ ") 				# Low, Medium, High, Hight, Mute
+	local icons=("L" "M" "H" "H" "X") 				# Low, Medium, High, Hight, Mute
 	local ismute=`pactl get-sink-mute @DEFAULT_SINK@ | grep yes` 	# Mute: Has Length, otherwise Length=0
 	local volOutput=`pactl get-sink-volume @DEFAULT_SINK@` 		# Pactl Ouput
 	local volumeList=(${volOutput///// }) 				# Pactl Ouput, in List Format
@@ -24,21 +24,21 @@ myvolume(){
 		fi
 		local prefix="${icons[-1]} "
 	fi
-	echo $prefix$body
+	echo Sound $prefix$body
 }
 
 mydate(){
   export LC_TIME=zh_TW.UTF-8
-	local d="$(date +" 周%a%b%e号 %Y")"
+	local d="$(date +"周%a%b%e号 %Y")"
 	local time="$(date +"%H:%M")"
 	# echo -e "鬒 ${d} >${xingqi}< >${yuefen}<"
-	echo -e "鬒 ${d} | ${time}"
+	echo -e "${d} | ${time}"
 }
 
 mybrightness(){
-	local icons=
+	local icons="Brightness"
 	local b=`xbacklight | xargs printf "%.f\\n"`
-	echo -e "${icons}  ${b}%"
+	echo -e "${icons} ${b}%"
 }
 
 mybattery(){

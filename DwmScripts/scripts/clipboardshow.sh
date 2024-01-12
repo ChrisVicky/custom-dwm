@@ -6,6 +6,7 @@
 # @version 1.0
 # @date 2023-02-14
 # 
+
 names=("clipboard" "primary" "secondary")
 while true 
 do
@@ -19,5 +20,5 @@ do
     echo 
     echo "-------------------"
   done
-  sleep 1
+  clipnotify
 done
